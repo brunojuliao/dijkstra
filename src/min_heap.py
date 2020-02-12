@@ -44,3 +44,6 @@ class MinHeap:
 
     def print(self):
         print(self.heap)
+
+    def get_repr(self):
+        return self.heap.__repr__()
