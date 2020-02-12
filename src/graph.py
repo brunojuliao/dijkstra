@@ -24,7 +24,8 @@ class Graph:
 
     def find_shortest_path(self, start_node_name, end_node_name):
         self.previous = []
-        start_node = self.nodes[start_node_name]
+        nodes = copy.deepcopy(self.nodes)
+        start_node = nodes[start_node_name]
         start_node.cost = 0
         self.remaining.push(start_node)
 
@@ -34,21 +35,21 @@ class Graph:
             if node is None:
                 break
 
-            self.visit(node)
+            self.visit(node, nodes)
 
             if node.name == end_node_name:
                 break
 
         print(self.previous)
 
-    def visit(self, node):
+    def visit(self, node, nodes):
         node.is_visited = True
         self.previous.append(node.name)
 
         neighbor_heap = MinHeap()
 
         for neighbor_name in node.neighbors:
-            neighbor_node = self.nodes[neighbor_name]
+            neighbor_node = nodes[neighbor_name]
 
             if neighbor_node.is_visited:
                 continue
@@ -78,4 +79,4 @@ g = Graph({
 })
 
 g.find_shortest_path("A", "E")
-#g.find_shortest_path("C", "B")
+g.find_shortest_path("C", "B")
