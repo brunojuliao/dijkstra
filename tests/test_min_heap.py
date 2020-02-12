@@ -28,7 +28,16 @@ class test_min_heap(unittest.TestCase):
         #Act
         temp = self.test_heap.pop()
         #Assert
-        temp = self.min_node
+        self.assertTrue(temp.name == self.min_node.name and temp.cost == self.min_node.cost)
+
+    def test_min_heap_pop(self):
+        #Arrange
+        current_len = len(self.test_heap.heap)
+        #Act
+        self.test_heap.pop()
+        #Assert
+        self.assertNotEqual(current_len, len(self.test_heap.heap))
+        self.assertEqual(current_len - 1, len(self.test_heap.heap))
 
 if __name__ == '__main__':
     unittest.main()

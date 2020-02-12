@@ -1,11 +1,12 @@
 class Node:
-    def __init__(self, name, weight):
+    def __init__(self, name, cost):
         self.name = name
-        self.weight = weight
+        self.cost = cost
         self.neighbors = []
+        self.is_visited = False
 
-    def add_neighbor(name):
+    def add_neighbor(self, name):
         self.neighbors.append(name)
 
     def __repr__(self):
-        return self.name + " - " + str(self.weight)
+        return self.name + " - " + str(self.cost)

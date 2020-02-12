@@ -10,7 +10,7 @@ class MinHeap:
                 break
             offset = 2 if current_index % 2 == 0 else 1
             parent_index = int((current_index - offset) / 2)
-            if self.heap[parent_index].weight <= self.heap[current_index].weight:
+            if self.heap[parent_index].cost <= self.heap[current_index].cost:
                 break
             self.heap[parent_index], self.heap[current_index] = self.heap[current_index], self.heap[parent_index]
             current_index = parent_index
@@ -19,21 +19,24 @@ class MinHeap:
         if len(self.heap) == 0:
             return None
         temp = self.heap[0]
-        self.heap[0] = self.heap[len(self.heap) - 1]
+        last_index = len(self.heap) - 1
+        self.heap[0] = self.heap[last_index]
+
+        del self.heap[last_index]
 
         current_index = 0
         while(True):
-            if current_index == len(self.heap) - 1:
+            if current_index == last_index:
                 break
 
             right_index = (current_index * 2) + 2
-            if self.heap[right_index].weight < self.heap[current_index].weight:
+            if right_index in self.heap and self.heap[right_index].cost < self.heap[current_index].cost:
                 self.heap[right_index], self.heap[current_index] = self.heap[current_index], self.heap[right_index]
                 current_index = right_index
                 continue
 
             left_index = (current_index * 2) + 1
-            if self.heap[left_index].weight < self.heap[current_index].weight:
+            if left_index in self.heap and self.heap[left_index].cost < self.heap[current_index].cost:
                 self.heap[left_index], self.heap[current_index] = self.heap[current_index], self.heap[left_index]
                 current_index = left_index
                 continue
