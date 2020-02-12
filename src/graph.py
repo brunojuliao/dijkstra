@@ -40,11 +40,11 @@ class Graph:
             if node.name == end_node_name:
                 break
 
-        print(self.previous)
+        return self.previous
 
     def visit(self, node, nodes):
         node.is_visited = True
-        self.previous.append(node.name)
+        self.previous.append(node)
 
         neighbor_heap = MinHeap()
 
@@ -78,5 +78,5 @@ g = Graph({
     ("D", "E"): 7,
 })
 
-g.find_shortest_path("A", "E")
-g.find_shortest_path("C", "B")
+print(g.find_shortest_path("A", "E"))
+print(g.find_shortest_path("C", "B"))
