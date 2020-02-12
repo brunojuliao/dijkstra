@@ -66,17 +66,3 @@ class Graph:
         min_neighbor = neighbor_heap.pop()
         if min_neighbor != None:
             self.remaining.push(min_neighbor)
-
-
-g = Graph({
-    ("A", "B"): 3,
-    ("A", "C"): 1,
-    ("B", "C"): 7,
-    ("B", "D"): 5,
-    ("B", "E"): 1,
-    ("C", "D"): 2,
-    ("D", "E"): 7,
-})
-
-print(g.find_shortest_path("A", "E"))
-print(g.find_shortest_path("C", "B"))
