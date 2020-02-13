@@ -10,7 +10,7 @@ class MinHeap:
                 break
             offset = 2 if current_index % 2 == 0 else 1
             parent_index = int((current_index - offset) / 2)
-            if self.heap[parent_index].cost <= self.heap[current_index].cost:
+            if self.heap[parent_index].is_less_than(self.heap[current_index]):
                 break
             self.heap[parent_index], self.heap[current_index] = self.heap[current_index], self.heap[parent_index]
             current_index = parent_index
@@ -30,13 +30,13 @@ class MinHeap:
                 break
 
             right_index = (current_index * 2) + 2
-            if right_index in self.heap and self.heap[right_index].cost < self.heap[current_index].cost:
+            if right_index in self.heap and self.heap[right_index].is_less_than(self.heap[current_index]):
                 self.heap[right_index], self.heap[current_index] = self.heap[current_index], self.heap[right_index]
                 current_index = right_index
                 continue
 
             left_index = (current_index * 2) + 1
-            if left_index in self.heap and self.heap[left_index].cost < self.heap[current_index].cost:
+            if left_index in self.heap and self.heap[left_index].is_less_than(self.heap[current_index]):
                 self.heap[left_index], self.heap[current_index] = self.heap[current_index], self.heap[left_index]
                 current_index = left_index
                 continue

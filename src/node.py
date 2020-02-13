@@ -8,5 +8,10 @@ class Node:
     def add_neighbor(self, name):
         self.neighbors.append(name)
 
+    def is_less_than(self, other_node):
+        if self.cost > other_node.cost:
+            return False
+        return True
+
     def __repr__(self):
         return self.name + " - " + str(self.cost)
