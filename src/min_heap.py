@@ -1,3 +1,5 @@
+from src.node import Node
+
 class MinHeap:
     def __init__(self):
         self.heap = []
@@ -5,9 +7,7 @@ class MinHeap:
     def push(self, node):
         self.heap.append(node)
         current_index = len(self.heap) - 1
-        while(True):
-            if current_index == 0:
-                break
+        while(current_index > 0):
             offset = 2 if current_index % 2 == 0 else 1
             parent_index = int((current_index - offset) / 2)
             if self.heap[parent_index].is_less_than(self.heap[current_index]):
@@ -16,19 +16,18 @@ class MinHeap:
             current_index = parent_index
 
     def pop(self):
-        if len(self.heap) == 0:
+        heap_length = len(self.heap)
+        if heap_length == 0:
             return None
-        temp = self.heap[0]
-        last_index = len(self.heap) - 1
-        self.heap[0] = self.heap[last_index]
+        elif heap_length == 1:
+            return self.heap.pop()
 
-        del self.heap[last_index]
+        node = self.heap.pop(0)
+        self.heap.insert(0, self.heap.pop())
+        heap_length = len(self.heap)
 
         current_index = 0
-        while(True):
-            if current_index == last_index:
-                break
-
+        while(heap_length > 1 and current_index < heap_length - 1):
             right_index = (current_index * 2) + 2
             if right_index in self.heap and self.heap[right_index].is_less_than(self.heap[current_index]):
                 self.heap[right_index], self.heap[current_index] = self.heap[current_index], self.heap[right_index]
@@ -43,7 +42,7 @@ class MinHeap:
 
             break
 
-        return temp
+        return node
 
     def print(self):
         print(self.heap)
