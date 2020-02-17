@@ -14,11 +14,13 @@ class Graph:
         for key in edge_cost:
             self.node_names |= set(key)
 
-            if key[0] not in self.nodes:
+            left_node = self.nodes.get(key[0])
+            if left_node == None:
                 self.nodes[key[0]] = Node(key[0], inf)
             self.nodes[key[0]].add_neighbor(key[1])
 
-            if key[1] not in self.nodes:
+            right_node = self.nodes.get(key[1])
+            if right_node == None:
                 self.nodes[key[1]] = Node(key[1], inf)
             self.nodes[key[1]].add_neighbor(key[0])
 
@@ -54,10 +56,10 @@ class Graph:
             if neighbor_node.is_visited:
                 continue
 
-            if (node.name, neighbor_name) in self.edge_cost:
-                cost = node.cost + self.edge_cost[(node.name, neighbor_name)]
-            elif (neighbor_name, node.name) in self.edge_cost:
-                cost = node.cost + self.edge_cost[(neighbor_name, node.name)]
+            temp_cost = self.edge_cost.get((node.name, neighbor_name))
+            if temp_cost == None:
+                temp_cost = self.edge_cost[(neighbor_name, node.name)]
+            cost = node.cost + temp_cost
             
             if cost < neighbor_node.cost:
                 neighbor_node.cost = cost

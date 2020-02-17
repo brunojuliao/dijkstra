@@ -29,13 +29,13 @@ class MinHeap:
         current_index = 0
         while(heap_length > 1 and current_index < heap_length - 1):
             right_index = (current_index * 2) + 2
-            if right_index in self.heap and self.heap[right_index].is_less_than(self.heap[current_index]):
+            if right_index < heap_length and self.heap[right_index].is_less_than(self.heap[current_index]):
                 self.heap[right_index], self.heap[current_index] = self.heap[current_index], self.heap[right_index]
                 current_index = right_index
                 continue
 
             left_index = (current_index * 2) + 1
-            if left_index in self.heap and self.heap[left_index].is_less_than(self.heap[current_index]):
+            if left_index < heap_length and self.heap[left_index].is_less_than(self.heap[current_index]):
                 self.heap[left_index], self.heap[current_index] = self.heap[current_index], self.heap[left_index]
                 current_index = left_index
                 continue
