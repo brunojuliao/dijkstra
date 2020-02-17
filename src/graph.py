@@ -34,7 +34,7 @@ class Graph:
         while True:
             node = self.remaining.pop()
 
-            if node is None:
+            if node == None:
                 break
 
             self.visit(node, nodes)
